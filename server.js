@@ -30,14 +30,14 @@ peers.on('connection', socket => {
 
     socket.on('offerOrAnswer', (data) => {
         for (const [socketID, socket] of connectedPeers.entries()) {
-            if (socketID != data.socketID) {
+            if (socketID !== data.socketID) {
                 socket.emit('offerOrAnswer', data.payload)
             }
         }
     })
     socket.on('candidate', (data) => {
         for (const [socketID, socket] of connectedPeers.entries()) {
-            if (socketID != data.socketID) {
+            if (socketID !== data.socketID) {
                 socket.emit('candidate', data.payload)
             }
         }
@@ -45,7 +45,7 @@ peers.on('connection', socket => {
     
     socket.on('disconnect', (reason) => {
         for (const [socketID, socket_map] of connectedPeers.entries()) {
-            if (socketID != socket.id) {
+            if (socketID !== socket.id) {
                 socket_map.emit('disconnected',reason)
             }
         }
